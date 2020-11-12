@@ -12,10 +12,9 @@ OBJ =	ft_strlen.o\
 
 SFLAGS = -f elf64
 
-all:
-	$(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME):
 	nasm $(SFLAGS) $(SRC)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
@@ -23,12 +22,9 @@ $(NAME): $(OBJ)
 clean:
 	rm -rf $(OBJ)
 
-fclean:
-	clean
+fclean: clean
 	rm -rf $(NAME)
 
-re:
-	fclean
-	all
+re: fclean all
 
 .PHONY: all clean fclean re
