@@ -5,7 +5,6 @@ ft_strcmp:
 	xor rax, rax
 	xor r8, r8
 
-	jmp stat
 	less:
 		mov rax, -1
 		jmp exit
