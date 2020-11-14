@@ -1,41 +1,45 @@
-NAME =	libasm.a
+NAME		=	libasm.a
 
-SRC =	ft_strlen.s\
-		ft_strcpy.s\
-		ft_strcmp.s\
-		ft_write.s\
-		ft_read.s\
-		ft_strdup.s\
-		ft_atoi_base.s\
-		ft_list_push_front.s\
-		ft_list_size.o\
+SRCS		=	ft_strlen.s\
+				ft_strcmp.s\
+				ft_strcpy.s\
+				ft_write.s\
+				ft_read.s\
+				ft_strdup.s\
+				ft_atoi_base.s\
+				ft_list_size.s\
+				ft_list_push_front.s\
 
-OBJ =	ft_strlen.o\
-		ft_strcpy.o\
-		ft_strcmp.o\
-		ft_write.o\
-		ft_read.o\
-		ft_strdup.o\
-		ft_atoi_base.o\
-		ft_list_push_front.o\
-		ft_list_size.o\
+OBJS		=	$(SRCS:.s=.o)
 
-SFLAGS = -f elf64
+NA			=	nasm
+NA_FLAGS	=	-f elf64
+FLAGS 		=	-Wall -Werror -Wextra
+TEST		=	test
 
-all: $(NAME)
+%.o:			%.s
+				$(NA) $(NA_FLAGS) $<
 
-$(NAME):
-	nasm $(SFLAGS) $(SRC)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+all:			$(NAME)
+
+$(NAME):		$(OBJS)
+				ar rcs $(NAME) $(OBJS)
 
 clean:
-	rm -rf $(OBJ)
+				rm -rf $(OBJS)
 
-fclean: clean
-	rm -rf $(NAME)
-	rm -rf a.out
+fclean:			clean
+				rm -rf $(NAME) $(TEST)
 
-re: fclean all
+re:				fclean $(NAME)
 
-.PHONY: all clean fclean re
+test:			$(NAME)
+				gcc $(FLAGS) main.c $(NAME) -o $(TEST)
+				./$(TEST) < Makefile
+
+git:
+	git add .
+	git commit -m "make git done"
+	git push
+
+.PHONY:			all clean fclean re test
