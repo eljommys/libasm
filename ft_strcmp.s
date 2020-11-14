@@ -3,8 +3,9 @@ section .text
 
 ft_strcmp:
 	xor rax, rax
-	xor r8, r8
+	xor rcx, rcx
 
+	jmp stat
 	less:
 		mov rax, -1
 		jmp exit
@@ -12,16 +13,15 @@ ft_strcmp:
 		mov rax, 1
 		jmp exit
 	increment:
-		inc r8
+		inc rcx
 	stat:
-		mov dl, BYTE[rsi + r8]
-		cmp BYTE[rdi + r8], dl
+		mov dl, BYTE[rsi + rcx]
+		cmp BYTE[rdi + rcx], dl
 		jl less
-		cmp BYTE[rdi + r8], dl
 		jg great
-		cmp BYTE[rsi + r8], 0
+		cmp BYTE[rsi + rcx], 0
 		je exit
-		cmp  BYTE[rdi + r8], 0
+		cmp  BYTE[rdi + rcx], 0
 		je exit
 		jmp increment
 	exit:

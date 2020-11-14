@@ -46,7 +46,7 @@ int main(void)
 
 	//printf("atoi = %d\n", ft_atoi_base("   -183 21", "0123456789"));
 
-
+	printf("i = %d\n", ft_strcmp("hols", "hola"));
 
 	return (0);
 }
