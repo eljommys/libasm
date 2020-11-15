@@ -52,6 +52,6 @@ git:
 	git push
 
 leaks:
-	valgrind --leak-check=full --show-leak-kinds=all
+	valgrind --leak-check=full --show-leak-kinds=all ./$(TEST)
 
 .PHONY:			all clean fclean re test git leaks
