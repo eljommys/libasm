@@ -11,33 +11,20 @@ section .text
 ;}					t_list;
 
 ft_list_push_front:
-	jmp add_element_if
-	add_element:
-		push rax
-		push rdi
-		mov rdi, 16
-		call malloc
-		pop rdi
-		mov QWORD[rax], rsi
-		mov QWORD[rax + 8], rdi
-		mov QWORD[rdi], rax
-		pop rax
-		jmp exit
-	create_list:
-		push rax
-		push rdi
-		mov rdi, 16
-		call malloc
-		pop rdi
-		mov QWORD[rax], rsi
-		mov QWORD[rax + 8], 0
-		mov QWORD[rdi], rax
-		pop rax
-		jmp exit
-	add_element_if:
-		cmp QWORD[rdi], 0
-		jne add_element_if
-		cmp QWORD[rdi], 0
-		je create_list
+	push	rsp
+	push	rdi
+	push	rsi
+	mov		rdi, 16
+	xor		rax, rax
+	call	malloc
+	pop		rsi
+	pop		rdi
+	cmp		rax, 0
+	je		exit
+	mov		[rax], rsi
+	mov		rcx, [rdi]
+	mov		[rax + 8], rcx
+	mov		[rdi], rax
 	exit:
+		pop		rsp
 		ret

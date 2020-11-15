@@ -13,7 +13,7 @@ BONUS_SRCS	=	ft_atoi_base_bonus.s\
 				ft_list_size_bonus.s\
 				ft_list_push_front_bonus.s\
 
-BONUS_OBJS	=	$(BONUS_OBJS:.s=.o)
+BONUS_OBJS	=	$(BONUS_SRCS:.s=.o)
 
 NA			=	nasm
 NA_FLAGS	=	-f elf64
@@ -28,13 +28,19 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 				ar rcs $(NAME) $(OBJS)
 
+bonus:			$(OBJS) $(BONUS_OBJS)
+				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+
 clean:
-				rm -rf $(OBJS)
+				rm -rf $(OBJS) $(BONUS_OBJS)
+				rm -rf example.txt
 
 fclean:			clean
 				rm -rf $(NAME) $(TEST)
 
 re:				fclean $(NAME)
+
+re_bonus:		fclean bonus
 
 test:			$(NAME)
 				gcc $(FLAGS) main.c $(NAME) -o $(TEST)

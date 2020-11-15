@@ -28,3 +28,5 @@ int ft_strcmp(char *s1, char *s2);
 int ft_read(int fd, char *buf, int size);
 char *ft_strdup(char *str);
 int ft_atoi_base(char *str, char *base);
+int ft_list_size(t_list *list);
+int ft_list_push_front(t_list **begin_list, void *data);
