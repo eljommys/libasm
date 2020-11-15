@@ -51,4 +51,7 @@ git:
 	git commit -m "make git done"
 	git push
 
-.PHONY:			all clean fclean re test
+leaks:
+	valgrind --leak-check=full --show-leak-kinds=all
+
+.PHONY:			all clean fclean re test git leaks

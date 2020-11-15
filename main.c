@@ -53,6 +53,7 @@ int main(void)
 	printf("%s, ft_read = %ld\n", dest, d);
 	d = read(fd, dest, i);
 	printf("%s, read = %ld\n\n", dest, d);
+	free(dest);
 	close(fd);
 
 	//ft_strdup =======================================================
